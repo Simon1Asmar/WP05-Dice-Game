@@ -1,5 +1,33 @@
 //Selecting DOM Elements
+const diceImages = document.querySelectorAll("form img");
+const newGameButton = document.querySelector("#new-game-btn");
+const rollDiceButton = document.querySelector("#roll-dice-btn");
+const holdButton = document.querySelector("#hold-btn");
+const buttonsForm = document.querySelector("form");
 
+// Add event listeners to buttons
+buttonsForm.addEventListener("click", gameButtonsListener);
+
+function gameButtonsListener(event){
+  event.preventDefault();
+
+  const targetId = event.target.id
+
+  switch (targetId) {
+    case "new-game-btn":
+      startNewGame();
+      break;
+    case "roll-dice-btn":
+      rollDice();
+      break;
+    case "hold-btn":
+      hold();
+      break;
+    default:
+      console.log(targetId);
+      break;
+  }
+}
 
 const player1 = {
   playerName: "Player 1",
@@ -56,8 +84,10 @@ function rollDice(){
   if(currentPlayer){
     // generate a random number between 1 and 6 for each dice
     let dice1 = Math.floor(Math.random() * 6) + 1;
+    diceImages[0].src = `./assets/imgs/dice pics/dice-${dice1}.png`
     console.log('dice1', dice1)
     let dice2 = Math.floor(Math.random() * 6) + 1;
+    diceImages[1].src = `./assets/imgs/dice pics/dice-${dice2}.png`
     console.log('dice2', dice2)
 
     // check if both values are not equal then add to currentScore
