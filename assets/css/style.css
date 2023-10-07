@@ -1,0 +1,59 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(45deg, rgba(228, 3, 78, 1) 0%, rgb(127, 1, 181) 100%);
+  color: #171717;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  display: flex;
+}
+
+.player-section {
+  min-width: 400px;
+  height: 100vh;
+  padding: 50px 0px;
+
+  background: linear-gradient(45deg, rgba(118, 118, 118, 0.6) 0%, rgba(133, 133, 133, 0.6) 100%);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-section section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.current-player-section{
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.457) 0%, rgba(255, 255, 255, 0.795) 100%);
+}
+
+.current-score-section {
+  background-color: rgba(218, 43, 104, 0.943);
+  padding: 5px 15px;
+
+  border-radius: 10px;
+
+  color: aliceblue;
+  
+  margin-top: 10px;
+}
+

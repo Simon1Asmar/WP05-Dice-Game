@@ -1,3 +1,6 @@
+//Selecting DOM Elements
+
+
 const player1 = {
   playerName: "Player 1",
   totalScore: 0,
@@ -13,11 +16,20 @@ const player2 = {
 
 let currentPlayer = null;
 
-startGame();
+startNewGame();
 
-function startGame(){
+function startNewGame(){
+  initializeValues();
+
   currentPlayer = player1;
   console.log(`Game Started! Current Player: ${currentPlayer.playerName}`);
+}
+
+function initializeValues(){
+  player1.totalScore = 0;
+  player1.currentScore = 0;
+  player2.totalScore = 0;
+  player2.currentScore = 0;
 }
 
 function endTurn(){
