@@ -1,6 +1,6 @@
 //Selecting DOM Elements
 const diceImages = document.querySelectorAll("form img");
-const buttonsForm = document.querySelector("form");
+const buttonsForm = document.querySelector("form#game-buttons");
 const player1Section = document.querySelector("#player1-section");
 const player2Section = document.querySelector("#player2-section");
 const currentScoreHeaders = document.querySelectorAll(".current-score-section h2");
@@ -8,6 +8,12 @@ const totalScoreHeaders = document.querySelectorAll(".total-score");
 const messages = document.querySelectorAll(".message");
 const rollDiceButton = document.querySelector("#roll-dice-btn");
 const holdButton = document.querySelector("#hold-btn");
+//target score panel
+const targetForm = document.querySelector("#target-form-section");
+const targetScoreInput = document.querySelector("#target-score");
+const firstPanel = document.querySelector("#first-panel");
+const instructions = document.querySelector("#instructions");
+
 
 rollDiceButton.disabled = true;
 holdButton.disabled = true;
@@ -20,6 +26,22 @@ let targetScore = 100;
 let winnerIndex = null;
 let loserIndex = null;
 
+targetForm.addEventListener("submit", setTargetScore)
+
+function setTargetScore(event){
+  event.preventDefault();
+
+  if(targetScoreInput.value.length > 0){
+    targetScore = targetScoreInput.value;
+    firstPanel.classList.add("collapsed");
+  
+    instructions.classList.add("collapsed");
+  
+    startNewGame();
+  }
+
+}
+
 // Add event listeners to buttons
 buttonsForm.addEventListener("click", gameButtonsListener);
 
@@ -30,7 +52,8 @@ function gameButtonsListener(event) {
 
   switch (targetId) {
     case "new-game-btn":
-      startNewGame();
+      firstPanel.classList.remove("collapsed");
+      // startNewGame();
       break;
     case "roll-dice-btn":
       rollDice();
@@ -61,6 +84,9 @@ const players = [player1, player2];
 // startNewGame();
 
 function startNewGame() {
+
+  firstPanel.classList.add("collapsed");
+
   initializeValues();
 
   currentPlayerIndex = 0;
@@ -170,8 +196,9 @@ function rollDice() {
     diceImages[1].src = `./assets/imgs/dice pics/dice-${dice2}.png`;
     console.log("dice2", dice2);
 
-    // check if both values are not equal then add to currentScore
-    if (dice1 != dice2) {
+    // check if its not a double six then add to currentScore
+    // if (dice1 != dice2) {
+    if (!(dice1 === 6 && dice2 === 6)) {
       players[currentPlayerIndex].currentScore += dice1 + dice2;
       messages[0].innerText = "";
       messages[1].innerText = "";

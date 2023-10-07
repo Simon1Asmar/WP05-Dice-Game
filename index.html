@@ -45,7 +45,7 @@
     </section>
 
     <section id="buttons-and-dice-section">
-      <form action="#">
+      <form action="#" id="game-buttons">
         <button id="new-game-btn">🔃 NEW GAME</button>
         <img src="./assets/imgs/dice pics/dice-1.png" alt="">
         <img src="./assets/imgs/dice pics/dice-1.png" alt="">
@@ -56,14 +56,21 @@
   </main>
 
   <section id="first-panel">
-    <section>
+    <section id="instructions">
       <h2>Game Instructions:</h2>
       <ul>
-        <li>In your turn - roll the dice (at least once) and accumilate the result in "current"</li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>In your turn - roll the dice (at least once) and accumilate the result in "current".</li>
+        <li>You can roll again or click "Hold" to save the points from "Current" and end the turn.</li>
+        <li>Note! if you get 6-6 - you will lose all points from "current" and the turn will go to your opponent.</li>
+        <li>If you managed to reach exactly the target score - you win! If you passed it you lose.</li>
       </ul>
+    </section>
+    <section id="target-form-section">
+      <h2>Please select a target score</h2>
+      <form action="#" id="target-form">
+        <input type="number" id="target-score" value="100">
+        <button>START GAME</button>
+      </form>
     </section>
   </section>
 
