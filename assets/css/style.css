@@ -79,3 +79,17 @@ main {
   height: 70px;
   width: 70px;
 }
+
+button {
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: solid transparent;
+}
+
+.winner-player-section {
+  color: rgba(218, 43, 104, 0.943);
+
+  font-weight: bold;
+
+  background: linear-gradient(45deg, rgba(24, 24, 24, 0.8) 0%, rgba(0, 0, 0, 0.795) 100%);
+}

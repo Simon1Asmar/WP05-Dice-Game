@@ -6,12 +6,17 @@ const player2Section = document.querySelector("#player2-section");
 const currentScoreHeaders = document.querySelectorAll(".current-score-section h2");
 const totalScoreHeaders = document.querySelectorAll(".total-score");
 const messages = document.querySelectorAll(".message");
+const rollDiceButton = document.querySelector("#roll-dice-btn");
+const holdButton = document.querySelector("#hold-btn");
+
+rollDiceButton.disabled = true;
+holdButton.disabled = true;
+
 
 let currentPlayerIndex = 0;
 
 let targetScore = 100;
 
-let isGameOver = false;
 let winnerIndex = null;
 let loserIndex = null;
 
@@ -92,12 +97,21 @@ function initializeValues() {
     message.innerText = "";
   });
 
-  isGameOver = false;
   winnerIndex = null;
   loserIndex = null;
+
+  holdButton.disabled = true;
+  rollDiceButton.disabled = false;
+
+  player1Section.classList.remove("current-player-section");
+  player1Section.classList.remove("winner-player-section");
+  player2Section.classList.remove("current-player-section");
+  player2Section.classList.remove("winner-player-section");
 }
 
 function endTurn() {
+  holdButton.disabled = true;
+
   if (currentPlayerIndex === 0) {
     currentPlayerIndex = 1;
     player1Section.classList.remove("current-player-section");
@@ -117,6 +131,8 @@ function hold() {
   players[currentPlayerIndex].currentScore = 0;
   
   updateUI();
+  
+  console.log('players[currentPlayerIndex].totalScore', players[currentPlayerIndex].totalScore);
 
   if(players[currentPlayerIndex].totalScore > targetScore){
 
@@ -128,6 +144,17 @@ function hold() {
 
     gameOver();
 
+  } else if(players[currentPlayerIndex].totalScore === targetScore){
+
+    console.log("WINNER" +currentPlayerIndex);
+
+    winnerIndex = currentPlayerIndex === 0 ? 0 : 1;
+    loserIndex = winnerIndex === 0 ? 1 : 0;
+
+    messages[winnerIndex].innerText = "You Win!";
+    messages[loserIndex].innerText = "";
+
+    gameOver();
   } else {
     endTurn();
   }
@@ -166,6 +193,8 @@ function rollDice() {
 
       endTurn();
     }  
+
+    holdButton.disabled = false;
 }
 
 // if player index is 0 it updates player 1's innerText if the index is 1 it updates player 2's innerText
@@ -175,5 +204,16 @@ function updateUI() {
 }
 
 function gameOver(){
-  isGameOver = true;
+  holdButton.disabled = true;
+  rollDiceButton.disabled = true;
+
+  player1Section.classList.remove("current-player-section");
+  player2Section.classList.remove("current-player-section");
+
+  if(winnerIndex === 0) {
+    player1Section.classList.add("winner-player-section");
+  } else {
+    player2Section.classList.add("winner-player-section");
+  }
 }
+
