@@ -32,7 +32,7 @@ function setTargetScore(event){
   event.preventDefault();
 
   if(targetScoreInput.value.length > 0){
-    targetScore = targetScoreInput.value;
+    targetScore = parseInt(targetScoreInput.value);
     firstPanel.classList.add("collapsed");
   
     instructions.classList.add("collapsed");
@@ -159,6 +159,7 @@ function hold() {
   updateUI();
   
   console.log('players[currentPlayerIndex].totalScore', players[currentPlayerIndex].totalScore);
+  console.log(targetScore);
 
   if(players[currentPlayerIndex].totalScore > targetScore){
 
