@@ -1,0 +1,62 @@
+const player1 = {
+  playerName: "Player 1",
+  totalScore: 0,
+  currentScore: 0,
+  totalNumOfWins: 0,
+}
+const player2 = {
+  playerName: "Player 2",
+  totalScore: 0,
+  currentScore: 0,
+  totalNumOfWins: 0,
+}
+
+let currentPlayer = null;
+
+startGame();
+
+function startGame(){
+  currentPlayer = player1;
+  console.log(`Game Started! Current Player: ${currentPlayer.playerName}`);
+}
+
+function endTurn(){
+  //switch current player
+  console.log(currentPlayer.playerName, player1.playerName);
+  if(currentPlayer === player1){
+    currentPlayer = player2;
+  } else {
+    currentPlayer = player1;
+  }
+  console.log(`turn ended! Current Player: ${currentPlayer.playerName}`);
+}
+
+// saves current score in total score, resets current score and ends turn
+function hold(){
+  currentPlayer.totalScore += currentPlayer.currentScore;
+  currentPlayer.currentScore = 0;
+
+  endTurn();
+}
+
+// Simulates the dice rolls
+function rollDice(){
+  if(currentPlayer){
+    // generate a random number between 1 and 6 for each dice
+    let dice1 = Math.floor(Math.random() * 6) + 1;
+    console.log('dice1', dice1)
+    let dice2 = Math.floor(Math.random() * 6) + 1;
+    console.log('dice2', dice2)
+
+    // check if both values are not equal then add to currentScore
+    if(dice1 != dice2){
+      currentPlayer.currentScore += (dice1 + dice2);
+    } else { // if they're equal reset current score and end turn
+      console.log("ROLLED A DOUBLE");
+      currentPlayer.currentScore = 0;
+      //end turn
+      endTurn();
+    }
+    console.log(currentPlayer);
+  }
+}
