@@ -9,6 +9,12 @@ const messages = document.querySelectorAll(".message");
 
 let currentPlayerIndex = 0;
 
+let targetScore = 100;
+
+let isGameOver = false;
+let winnerIndex = null;
+let loserIndex = null;
+
 // Add event listeners to buttons
 buttonsForm.addEventListener("click", gameButtonsListener);
 
@@ -80,6 +86,15 @@ function initializeValues() {
   totalScoreHeaders.forEach((header) => {
     header.innerText = "0";
   });
+
+  // resets message text
+  messages.forEach(message => {
+    message.innerText = "";
+  });
+
+  isGameOver = false;
+  winnerIndex = null;
+  loserIndex = null;
 }
 
 function endTurn() {
@@ -100,10 +115,22 @@ function hold() {
   players[currentPlayerIndex].totalScore += players[currentPlayerIndex].currentScore;
   // resets current score
   players[currentPlayerIndex].currentScore = 0;
-
+  
   updateUI();
 
-  endTurn();
+  if(players[currentPlayerIndex].totalScore > targetScore){
+
+    winnerIndex = currentPlayerIndex === 0 ? 1 : 0;
+    loserIndex = winnerIndex === 0 ? 1 : 0;
+
+    messages[winnerIndex].innerText = "You Win!";
+    messages[loserIndex].innerText = "Passed the target score";
+
+    gameOver();
+
+  } else {
+    endTurn();
+  }
 }
 
 // Simulates the dice rolls
@@ -119,25 +146,34 @@ function rollDice() {
     // check if both values are not equal then add to currentScore
     if (dice1 != dice2) {
       players[currentPlayerIndex].currentScore += dice1 + dice2;
+      messages[0].innerText = "";
+      messages[1].innerText = "";
       updateUI();
     } else {
+      // ROLLED A DOUBLE message
+      if(currentPlayerIndex === 0){
+        messages[0].innerText = "Rolled a double"
+        messages[1].innerText = ""
+      } else {
+        messages[0].innerText = ""
+        messages[1].innerText = "Rolled a double"
+      }
+
       // if they're equal reset current score and end turn
-      console.log("ROLLED A DOUBLE");
-
-
-      // players[currentPlayerIndex].currentScore += dice1 + dice2;
       players[currentPlayerIndex].currentScore = 0;
+
       updateUI();
 
-      //end turn
       endTurn();
-    }
-    // console.log(currentPlayer);
-  
+    }  
 }
 
 // if player index is 0 it updates player 1's innerText if the index is 1 it updates player 2's innerText
 function updateUI() {
   currentScoreHeaders[currentPlayerIndex].innerText = players[currentPlayerIndex].currentScore;
   totalScoreHeaders[currentPlayerIndex].innerText = players[currentPlayerIndex].totalScore;
+}
+
+function gameOver(){
+  isGameOver = true;
 }
