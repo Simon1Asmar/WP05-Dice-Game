@@ -36,7 +36,7 @@ main {
   align-items: center;
 }
 
-.player-section section{
+.player-section section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,7 @@ main {
 
 }
 
-.current-player-section{
+.current-player-section {
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.457) 0%, rgba(255, 255, 255, 0.795) 100%);
 }
 
